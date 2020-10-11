@@ -18,21 +18,18 @@ and a `unified` processor (compiler and transformers).
 const unified = require('unified')
 const markdown = require('remark-parse')
 const toMarkdown = require('remark-stringify')
-const strip = require('strip-markdopwn')
+const strip = require('strip-markdown')
 const bridge = require('@stefanprobst/unified-util-bridge')
 const toHast = require('remark-rehype')
 const toHtml = require('rehype-stringify')
 const content = '**This** is *some* text.'
 
-async function run() {
-  const processor = unified()
-    .use(markdown)
-    .use(bridge, 'plaintext', unified().use(strip).use(toMarkdown))
-    .use(toHast)
-    .use(toHtml)
-  const { data, contents } = processor.process(content)
-  console.log(contents) // markdown contents transformed to html
-  console.log(data.plaintext) // markdown contents transformed to plaintext
-}
-run()
+const processor = unified()
+  .use(markdown)
+  .use(bridge, 'plaintext', unified().use(strip).use(toMarkdown))
+  .use(toHast)
+  .use(toHtml)
+const { data, contents } = processor.processSync(content)
+console.log(contents) // markdown transformed to html
+console.log(data.plaintext) // markdown transformed to plaintext
 ```
