@@ -1,8 +1,8 @@
 {
   "name": "@stefanprobst/unified-util-bridge",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "src/index.js",
-  "types": "types",
+  "types": "src/index.d.ts",
   "repository": "git@github.com:stefanprobst/unified-util-bridge.git",
   "author": "Stefan Probst <stefanprobst@kolabnow.com>",
   "license": "MIT",
