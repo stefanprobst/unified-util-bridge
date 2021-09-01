@@ -1,5 +1,5 @@
-import { Processor, Transformer } from 'unified'
+import type { Plugin } from 'unified'
 
-declare function bridge(field: string, processor: Processor): Transformer
+declare const bridge: Plugin
 
-export = bridge
+export default bridge

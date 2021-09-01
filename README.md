@@ -15,21 +15,22 @@ The plugin takes two required parameters: the name of the `VFile` data property,
 and a `unified` processor (compiler and transformers).
 
 ```js
-const unified = require('unified')
-const markdown = require('remark-parse')
-const toMarkdown = require('remark-stringify')
-const strip = require('strip-markdown')
-const bridge = require('@stefanprobst/unified-util-bridge')
-const toHast = require('remark-rehype')
-const toHtml = require('rehype-stringify')
+import { unified } from 'unified'
+import fromMarkdown from 'remark-parse'
+import toMarkdown from 'remark-stringify'
+import strip from 'strip-markdown'
+import bridge from '@stefanprobst/unified-util-bridge'
+import toHast from 'remark-rehype'
+import toHtml from 'rehype-stringify'
+
 const content = '**This** is *some* text.'
 
 const processor = unified()
-  .use(markdown)
+  .use(fromMarkdown)
   .use(bridge, 'plaintext', unified().use(strip).use(toMarkdown))
   .use(toHast)
   .use(toHtml)
-const { data, contents } = processor.processSync(content)
-console.log(contents) // markdown transformed to html
-console.log(data.plaintext) // markdown transformed to plaintext
+const file = processor.processSync(content)
+console.log(String(file)) // markdown transformed to html
+console.log(file.data.plaintext) // markdown transformed to plaintext
 ```

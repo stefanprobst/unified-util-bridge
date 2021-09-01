@@ -1,6 +1,4 @@
-module.exports = attacher
-
-function attacher(field, processor) {
+export default function attacher(field, processor) {
   return transformer
   function transformer(tree, file, next) {
     processor.run(tree, function done(err, node) {
